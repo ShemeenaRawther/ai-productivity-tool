@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Productivity Tools Directory - 2026 Edition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f5',
+                            100: '#f9eee8',
+                            200: '#f3d9cb',
+                            300: '#ea39d',
+                            400: '#e07a48', // Hero accent color from image
+                            500: '#c86835', // Brand bronze/copper from image header
+                            600: '#aa5229',
+                            700: '#893f21',
+                            800: '#713520',
+                            900: '#5c2d1d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c86835;
+            border-radius: 4px;
+        }
+        
+        /* Infographic Tree Branch Styling */
+        .tree-line-v {
+            position: absolute;
+            left: 12px;
+            top: 28px;
+            bottom: 12px;
+            width: 2px;
+            background-color: #cbd5e1;
+        }
+        .dark .tree-line-v {
+            background-color: #334155;
+        }
+        
+        .tree-line-h {
+            position: absolute;
+            left: 12px;
+            width: 14px;
+            height: 2px;
+            background-color: #cbd5e1;
+        }
+        .dark .tree-line-h {
+            background-color: #334155;
+        }
+
+        /* Subtle Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-200 min-h-screen flex flex-col">
+
+    <!-- TOP HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 glass border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                    <i data-lucide="cpu" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                        <span>AI TOOLKIT</span>
+                        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300 border border-brand-200 dark:border-brand-800">2026 ARCHIVE</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Header Right Controls -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <button id="viewBookmarksBtn" onclick="toggleBookmarksFilter()" class="relative px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center gap-1.5">
+                    <i data-lucide="bookmark" class="w-4 h-4 text-brand-500"></i>
+                    <span class="hidden sm:inline">Bookmarks</span>
+                    <span id="bookmarkBadge" class="ml-1 text-xs px-1.5 py-0.2 bg-brand-500 text-white rounded-full font-bold hidden">0</span>
+                </button>
+
+                <button onclick="openSubmitModal()" class="px-3.5 py-2 text-sm font-medium rounded-lg bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-white transition flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Submit Tool</span>
+                </button>
+
+                <!-- Dark Mode Toggle -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i data-lucide="moon" id="themeIconMoon" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="sun" id="themeIconSun" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative py-12 md:py-16 bg-gradient-to-b from-brand-50/50 via-slate-50 to-slate-50 dark:from-slate-900/40 dark:via-slate-950 dark:to-slate-950 border-b border-slate-200/60 dark:border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100/80 dark:bg-brand-950/60 border border-brand-200 dark:border-brand-800/80 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-6">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-500"></i>
+                <span>Complete Infographic Directory & Ecosystem</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight uppercase max-w-4xl mx-auto leading-tight">
+                <span class="text-brand-500 dark:text-brand-400">AI Productivity</span> Tools
+            </h1>
+            <p class="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-normal">
+                Discover, search, filter, and explore 90+ top-tier AI software solutions mapped across 14 essential productivity categories.
+            </p>
+
+            <!-- STATS STRIP -->
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 dark:text-slate-400">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white" id="statTotalTools">91</span>
+                    <span class="text-xs uppercase tracking-wider font-semibold">AI Tools</span>
+                </div>
+                <div class="w-1 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white" id="statCategories">14</span>
+                    <span class="text-xs uppercase tracking-wider font-semibold">Categories</span>
+                </div>
+                <div class="w-1 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white">100%</span>
+                    <span class="text-xs uppercase tracking-wider font-semibold">Verified Free/Freemium</span>
+                </div>
+            </div>
+
+            <!-- SEARCH BAR CONTAINER -->
+            <div class="mt-8 max-w-2xl mx-auto relative">
+                <div class="relative flex items-center">
+                    <i data-lucide="search" class="absolute left-4 w-5 h-5 text-slate-400"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search tools (e.g. ChatGPT, Cursor, Midjourney, Claude)..." 
+                        class="w-full pl-12 pr-10 py-3.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl shadow-lg shadow-slate-200/50 dark:shadow-none focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-400 text-slate-900 dark:text-white placeholder-slate-400 text-base transition">
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="absolute right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hidden">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <!-- Autocomplete Dropdown -->
+                <div id="autocompleteDropdown" class="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto hidden"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTION -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- FILTER TOOLBAR & VIEW TOGGLE -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
+            
+            <!-- Category Chips Carousel / Container -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 no-scrollbar" id="categoryChips">
+                <!-- Dynamically generated -->
+            </div>
+
+            <!-- Layout View Controls -->
+            <div class="flex items-center justify-between lg:justify-end gap-3 shrink-0">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Layout Mode:</span>
+                <div class="inline-flex p-1 bg-slate-200/70 dark:bg-slate-800/80 rounded-xl border border-slate-300/50 dark:border-slate-700/50">
+                    <button id="viewGridBtn" onclick="setLayoutView('grid')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm">
+                        <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                        <span>Grid View</span>
+                    </button>
+                    <button id="viewTreeBtn" onclick="setLayoutView('tree')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                        <i data-lucide="git-fork" class="w-3.5 h-3.5"></i>
+                        <span>Infographic Tree</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVE FILTER SUMMARY BADGE (If filtered) -->
+        <div id="filterSummaryBar" class="hidden mt-4 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+            <span>Showing results for: <strong id="filterSummaryText" class="text-brand-600 dark:text-brand-400"></strong></span>
+            <button onclick="resetFilters()" class="text-xs underline hover:text-slate-900 dark:hover:text-white ml-2">Reset All</button>
+        </div>
+
+        <!-- 1. GRID VIEW CONTAINER -->
+        <div id="gridViewContainer" class="mt-8 space-y-12">
+            <!-- Dynamically Rendered Category Blocks -->
+        </div>
+
+        <!-- 2. INFOGRAPHIC TREE VIEW CONTAINER -->
+        <div id="treeViewContainer" class="mt-8 hidden">
+            <div class="p-6 md:p-8 rounded-3xl bg-amber-50/40 dark:bg-slate-900/60 border border-amber-200/60 dark:border-slate-800 shadow-inner">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-black text-brand-600 dark:text-brand-400 tracking-wider uppercase">Visual Infographic Ecosystem</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Interactive replica of the original 2026 AI Productivity Chart</p>
+                </div>
+                <div id="treeGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Dynamically Rendered Infographic Branches -->
+                </div>
+                <div class="text-right mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs font-bold tracking-widest text-slate-400">
+                    ©2026 ARCHIVE
+                </div>
+            </div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState" class="hidden py-16 text-center">
+            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">No matching AI tools found</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Try adjusting your search terms or category selection.</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-brand-500 text-white font-medium text-sm rounded-lg hover:bg-brand-600 transition">Clear Filters</button>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-2">
+                <i data-lucide="cpu" class="w-5 h-5 text-brand-500"></i>
+                <span class="font-bold text-slate-800 dark:text-slate-200">AI Productivity Directory</span>
+                <span>• Interactive Reference</span>
+            </div>
+            <p>© 2026 AI Tool Ecosystem. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- TOOL DETAIL MODAL -->
+    <div id="toolModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden transition-opacity">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+            <button onclick="closeModal()" class="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex items-start gap-4">
+                <div id="modalCategoryIcon" class="w-14 h-14 rounded-2xl bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-2xl shrink-0">
+                    <!-- Dynamic Icon -->
+                </div>
+                <div>
+                    <span id="modalCategoryBadge" class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Category</span>
+                    <h2 id="modalToolName" class="text-2xl font-black text-slate-900 dark:text-white mt-0.5">Tool Name</h2>
+                    <p id="modalTagline" class="text-xs text-slate-500 dark:text-slate-400 mt-1">Tagline summary</p>
+                </div>
+            </div>
+
+            <div class="mt-6 space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Key Description & Features</h4>
+                    <p id="modalDescription" class="leading-relaxed">Detailed tool capabilities go here...</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Best For</h4>
+                    <div id="modalUseCases" class="flex flex-wrap gap-1.5 mt-1">
+                        <!-- Dynamic Tags -->
+                    </div>
+                </div>
+
+                <div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+                    <span class="text-xs text-slate-400 font-medium">Pricing Model: <strong id="modalPricing" class="text-slate-700 dark:text-slate-200">Freemium</strong></span>
+                    <button id="modalFavBtn" onclick="toggleFavoriteFromModal()" class="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+                        <i data-lucide="bookmark" class="w-4 h-4"></i>
+                        <span id="modalFavText">Bookmark</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-8 flex gap-3">
+                <a id="modalVisitLink" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 px-4 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl text-center shadow-lg shadow-brand-500/25 transition flex items-center justify-center gap-2">
+                    <span>Visit Tool Website</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBMIT TOOL MODAL -->
+    <div id="submitModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeSubmitModal()" class="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="plus-circle" class="w-5 h-5 text-brand-500"></i>
+                Suggest an AI Tool
+            </h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Know a powerful AI productivity tool missing from this directory?</p>
+
+            <form id="submitToolForm" onsubmit="handleToolSubmission(event)" class="mt-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase mb-1">Tool Name *</label>
+                    <input type="text" required id="subName" placeholder="e.g. SuperAI" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase mb-1">Category *</label>
+                    <select id="subCategory" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <!-- Populated via JS -->
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase mb-1">Website URL *</label>
+                    <input type="url" required id="subUrl" placeholder="https://..." class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase mb-1">Short Description</label>
+                    <textarea id="subDesc" rows="2" placeholder="Briefly describe what this AI tool does..." class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm rounded-xl hover:bg-slate-800 dark:hover:bg-white transition">
+                    Submit Recommendation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl border border-slate-800 flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
+        <span id="toastMsg" class="text-sm font-medium">Notification message</span>
+    </div>
+
+    <!-- DATA & APP SCRIPT -->
+    <script>
+        // --- 1. DATA DATABASE (EXTRACTED DIRECTLY FROM INFOGRAPHIC IMAGE) ---
+        const DIRECTORY_DATA = [
+            {
+                id: 'chatbots',
+                title: 'AI CHATBOTS',
+                icon: 'message-square',
+                tools: [
+                    { name: 'ChatGPT', tag: 'Conversational AI & Reasoning', desc: 'Industry-leading conversational AI by OpenAI capable of coding, writing, reasoning, and multimodal interactions.', url: 'https://chat.openai.com', pricing: 'Freemium' },
+                    { name: 'Claude', tag: 'Anthropic LLM & Analysis', desc: 'Anthropic\'s AI assistant known for exceptional reasoning, nuanced long-form writing, and large context windows.', url: 'https://claude.ai', pricing: 'Freemium' },
+                    { name: 'DeepSeek', tag: 'Open Source Reasoning', desc: 'Advanced open-weight conversational models optimized for reasoning, math, and code generation.', url: 'https://www.deepseek.com', pricing: 'Free' },
+                    { name: 'Gemini', tag: 'Google Multimodal AI', desc: 'Google\'s flagship multimodal AI integrated into Google Workspace and search capabilities.', url: 'https://gemini.google.com', pricing: 'Freemium' },
+                    { name: 'Grok', tag: 'Real-time X/Twitter AI', desc: 'xAI\'s chatbot with direct access to real-time information streams and witty conversational style.', url: 'https://x.ai', pricing: 'Paid' },
+                    { name: 'Meta AI', tag: 'Open Social AI', desc: 'Meta\'s assistant powered by Llama, integrated across WhatsApp, Instagram, Messenger, and web.', url: 'https://www.meta.ai', pricing: 'Free' },
+                    { name: 'MS Copilot', tag: 'Microsoft Enterprise Assistant', desc: 'Microsoft\'s AI assistant embedded into Windows, Edge, and Office 365 applications.', url: 'https://copilot.microsoft.com', pricing: 'Freemium' },
+                    { name: 'Perplexity', tag: 'AI Search Engine', desc: 'Conversational answer engine delivering cited, real-time web research and detailed synthesized answers.', url: 'https://www.perplexity.ai', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'presentation',
+                title: 'AI PRESENTATION',
+                icon: 'presentation',
+                tools: [
+                    { name: 'Beautiful.Ai', tag: 'Smart Slide Design', desc: 'Automated presentation designer that formats slides instantly based on content.', url: 'https://www.beautiful.ai', pricing: 'Freemium' },
+                    { name: 'Gamma', tag: 'Interactive Decks & Web', desc: 'AI platform that generates polished presentations, documents, and webpages from text prompts.', url: 'https://gamma.app', pricing: 'Freemium' },
+                    { name: 'Pitch', tag: 'Collaborative Decks', desc: 'Modern presentation tool combining smart design templates with real-time team collaboration.', url: 'https://pitch.com', pricing: 'Freemium' },
+                    { name: 'Plus', tag: 'Google Slides AI', desc: 'AI add-on for Google Slides and Docs to auto-generate customized slide decks.', url: 'https://www.plusdocs.com', pricing: 'Freemium' },
+                    { name: 'PopAI', tag: 'Personal Productivity Workspace', desc: 'AI workspace to generate presentations, summarize PDFs, and create visual mind maps.', url: 'https://www.popai.pro', pricing: 'Freemium' },
+                    { name: 'Presentation.Ai', tag: 'Instant Deck Builder', desc: 'AI deck generator turning ideas into structured slides with one-click theme styling.', url: 'https://www.presentation.ai', pricing: 'Freemium' },
+                    { name: 'Slidesgo', tag: 'AI Presentation Templates', desc: 'Massive library of presentation templates with built-in AI slide generator.', url: 'https://slidesgo.com', pricing: 'Freemium' },
+                    { name: 'Tome', tag: 'AI Storytelling', desc: 'Generative storytelling tool for building interactive decks, portfolios, and visual essays.', url: 'https://tome.app', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'coding',
+                title: 'AI CODING ASSISTANCE',
+                icon: 'code-2',
+                tools: [
+                    { name: 'Askcodi', tag: 'Code Syntax Helper', desc: 'AI assistant for developers providing fast code generation, refactoring, and documentation.', url: 'https://www.askcodi.com', pricing: 'Freemium' },
+                    { name: 'Codiga', tag: 'Code Quality & Security', desc: 'Static code analysis tool providing automated code reviews and security fixes.', url: 'https://www.codiga.io', pricing: 'Freemium' },
+                    { name: 'Cursor', tag: 'AI-First Code Editor', desc: 'Forked VS Code IDE with native deep AI integration, codebase indexing, and multi-file editing.', url: 'https://www.cursor.com', pricing: 'Freemium' },
+                    { name: 'GitHub Copilot', tag: 'AI Pair Programmer', desc: 'The pioneer AI pair programmer that auto-completes code directly in popular IDEs.', url: 'https://github.com/features/copilot', pricing: 'Paid' },
+                    { name: 'Qodo', tag: 'Code Integrity & Testing', desc: 'AI developer tool focused on code testing, automated pull-request reviews, and quality.', url: 'https://www.qodo.ai', pricing: 'Freemium' },
+                    { name: 'Replit', tag: 'Cloud IDE & AI Agent', desc: 'Cloud browser development environment with integrated AI Agent to build apps end-to-end.', url: 'https://replit.com', pricing: 'Freemium' },
+                    { name: 'Tabnine', tag: 'Private Code Completion', desc: 'Privacy-focused AI code completion tool contextually trained for enterprise codebases.', url: 'https://www.tabnine.com', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'email',
+                title: 'AI EMAIL ASSISTANCE',
+                icon: 'mail',
+                tools: [
+                    { name: 'Clippit.Ai', tag: 'Email Drafting & Summaries', desc: 'AI email client plugin for drafting quick responses and summarizing long threads.', url: 'https://clippit.ai', pricing: 'Freemium' },
+                    { name: 'Friday', tag: 'Executive Inbox AI', desc: 'Smart email assistant that prioritizes messages and drafts executive-style replies.', url: 'https://friday.app', pricing: 'Freemium' },
+                    { name: 'Mailmaestro', tag: 'Outlook & Gmail AI', desc: 'AI email writer for Microsoft Outlook and Gmail designed to draft emails 10x faster.', url: 'https://www.mailmaestro.com', pricing: 'Freemium' },
+                    { name: 'Shortwave', tag: 'Next-Gen Inbox AI', desc: 'Modern email client built on Gmail with powerful search, summarization, and AI writing.', url: 'https://www.shortwave.com', pricing: 'Freemium' },
+                    { name: 'Superhuman', tag: 'High-Speed Email Experience', desc: 'Blazing fast email experience with AI auto-summaries, instant triage, and draft composition.', url: 'https://superhuman.com', pricing: 'Paid' }
+                ]
+            },
+            {
+                id: 'image',
+                title: 'AI IMAGE GENERATION',
+                icon: 'image',
+                tools: [
+                    { name: 'Adobe Firefly', tag: 'Commercial Safe Image Gen', desc: 'Adobe\'s generative AI model suite integrated directly into Photoshop and Illustrator.', url: 'https://firefly.adobe.com', pricing: 'Freemium' },
+                    { name: 'DALL-E', tag: 'OpenAI Image Model', desc: 'OpenAI\'s photorealistic and artistic image generation model integrated into ChatGPT.', url: 'https://openai.com/dall-e-3', pricing: 'Paid' },
+                    { name: 'FLUX.1', tag: 'State-Of-The-Art Image Model', desc: 'Next-generation open-weights image model known for exceptional photorealism and typography.', url: 'https://blackforestlabs.ai', pricing: 'Free' },
+                    { name: 'Ideogram', tag: 'Graphic Text & Image AI', desc: 'AI image generator specialized in rendering perfect legibility for typography inside images.', url: 'https://ideogram.ai', pricing: 'Freemium' },
+                    { name: 'Midjourney', tag: 'Aesthetic Imagery', desc: 'Leading creative AI image synthesis tool praised for ultra-detailed, artistic renders.', url: 'https://www.midjourney.com', pricing: 'Paid' },
+                    { name: 'Recraft', tag: 'Vector & Graphic Design AI', desc: 'Generative AI canvas for producing vector art, icon sets, 3D assets, and brand graphics.', url: 'https://www.recraft.ai', pricing: 'Freemium' },
+                    { name: 'StableDiffusion', tag: 'Open Diffusion Models', desc: 'Open-source image generation engine customizable for enterprise, fine-tuning, and local runs.', url: 'https://stability.ai', pricing: 'Free' }
+                ]
+            },
+            {
+                id: 'spreadsheet',
+                title: 'AI SPREADSHEET',
+                icon: 'table',
+                tools: [
+                    { name: 'Bricks', tag: 'Visual Spreadsheet AI', desc: 'Combines spreadsheets, documents, and presentations powered by AI automation.', url: 'https://www.bricks.cx', pricing: 'Freemium' },
+                    { name: 'Formula Bot', tag: 'Excel & Sheet Formulas', desc: 'Converts text instructions into complex Excel formulas, VBA scripts, and SQL queries.', url: 'https://formulabot.com', pricing: 'Freemium' },
+                    { name: 'Gigasheet', tag: 'Big Data AI Spreadsheet', desc: 'No-code big data spreadsheet processing millions of rows with natural language analysis.', url: 'https://www.gigasheet.com', pricing: 'Freemium' },
+                    { name: 'Rows AI', tag: 'Modern Data Spreadsheet', desc: 'Interactive spreadsheet with built-in integrations, web scraping, and AI data analyst.', url: 'https://rows.com', pricing: 'Freemium' },
+                    { name: 'SheetAI', tag: 'Google Sheets Assistant', desc: 'Suite of custom functions to bring generative AI capabilities directly into Google Sheets.', url: 'https://www.sheetai.app', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'meeting',
+                title: 'AI MEETING NOTES',
+                icon: 'video',
+                tools: [
+                    { name: 'Avoma', tag: 'AI Meeting Lifecycle', desc: 'AI meeting assistant and revenue intelligence platform for recording, transcription, and summaries.', url: 'https://www.avoma.com', pricing: 'Freemium' },
+                    { name: 'Equal Time', tag: 'Inclusion & Meeting Analytics', desc: 'AI tool tracking speaking time and participation metrics to ensure inclusive team meetings.', url: 'https://equaltime.io', pricing: 'Freemium' },
+                    { name: 'Fathom', tag: 'Free Zoom & Teams Notetaker', desc: 'Popular free AI meeting recorder that instantly transcribes and highlights key discussion moments.', url: 'https://fathom.video', pricing: 'Freemium' },
+                    { name: 'Fellow.App', tag: '1-on-1s & Team Notes', desc: 'All-in-one meeting management platform with AI agenda creation and action item tracking.', url: 'https://fellow.app', pricing: 'Freemium' },
+                    { name: 'Fireflies', tag: 'Automated Conversation Intelligence', desc: 'AI bot that joins meetings across Zoom, Google Meet, and Teams to transcribe and search audio.', url: 'https://fireflies.ai', pricing: 'Freemium' },
+                    { name: 'Krisp', tag: 'Noise Cancellation & Notes', desc: 'AI noise-canceling audio app that also generates meeting transcripts on-device.', url: 'https://krisp.ai', pricing: 'Freemium' },
+                    { name: 'Otter', tag: 'Real-time Audio Transcription', desc: 'Real-time meeting note-taker and automated slide capture assistant.', url: 'https://otter.ai', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'workflow',
+                title: 'AI WORKFLOW AUTOMATION',
+                icon: 'workflow',
+                tools: [
+                    { name: 'Integrately', tag: '1-Click App Automation', desc: 'Integration platform with thousands of ready-to-use 1-click automation flows.', url: 'https://integrately.com', pricing: 'Freemium' },
+                    { name: 'Make', tag: 'Visual Process Builder', desc: 'Visual workflow automation system supporting complex logic and custom API hooks.', url: 'https://www.make.com', pricing: 'Freemium' },
+                    { name: 'Monday.Com', tag: 'AI Work OS', desc: 'Work management platform enhanced with AI for automated tasks and project tracking.', url: 'https://monday.com', pricing: 'Freemium' },
+                    { name: 'N8n', tag: 'Fair-Code Node Automation', desc: 'Extendable workflow automation tool for technical teams available self-hosted or cloud.', url: 'https://n8n.io', pricing: 'Freemium' },
+                    { name: 'Wrike', tag: 'Enterprise Project AI', desc: 'Enterprise project management software with predictive workflow automation.', url: 'https://www.wrike.com', pricing: 'Freemium' },
+                    { name: 'Zapier', tag: 'Connect Apps with AI', desc: 'Industry standard for connecting web apps, now featuring natural language AI Zap creation.', url: 'https://zapier.com', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'writing',
+                title: 'AI WRITING GENERATION',
+                icon: 'pen-tool',
+                tools: [
+                    { name: 'Copy.Ai', tag: 'GTM & Copywriting Suite', desc: 'AI platform engineered for marketing teams to scale content engine and sales outreach.', url: 'https://www.copy.ai', pricing: 'Freemium' },
+                    { name: 'Grammarly', tag: 'Grammar & Tone Correction', desc: 'Ubiquitous writing assistant that improves grammar, clarity, and tone across desktop apps.', url: 'https://www.grammarly.com', pricing: 'Freemium' },
+                    { name: 'Jasper', tag: 'Enterprise Content Marketing', desc: 'Generative AI platform designed for enterprise marketing campaigns and brand voice.', url: 'https://www.jasper.ai', pricing: 'Paid' },
+                    { name: 'JotBot', tag: 'AI Document Writer', desc: 'AI writing assistant that mimics your personal writing style and cites sources accurately.', url: 'https://www.jotbot.kim', pricing: 'Freemium' },
+                    { name: 'Quarkle', tag: 'Creative & Fiction AI', desc: 'AI writing partner tailored for fiction authors and creative manuscript editing.', url: 'https://www.quarkle.ai', pricing: 'Freemium' },
+                    { name: 'Quillbot', tag: 'Paraphrasing & Summarizer', desc: 'Popular paraphrasing, grammar check, and text summarization tool.', url: 'https://quillbot.com', pricing: 'Freemium' },
+                    { name: 'Rytr', tag: 'Budget Copywriting AI', desc: 'Affordable AI writer for blog posts, ads, social content, and product descriptions.', url: 'https://rytr.me', pricing: 'Freemium' },
+                    { name: 'Sudowrite', tag: 'Novel & Screenplay Writer', desc: 'Creative writing environment optimized for fiction writers, plot expansion, and scene drafting.', url: 'https://www.sudowrite.com', pricing: 'Paid' },
+                    { name: 'Writesonic', tag: 'SEO & Article Generator', desc: 'AI content generator tailored for SEO optimized articles, ads, and landing pages.', url: 'https://writesonic.com', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'scheduling',
+                title: 'AI SCHEDULING',
+                icon: 'calendar',
+                tools: [
+                    { name: 'Calendly', tag: 'Automated Booking Links', desc: 'Leading calendar booking app now featuring AI scheduling workflows and group routing.', url: 'https://calendly.com', pricing: 'Freemium' },
+                    { name: 'Clockwise', tag: 'Focus Time Optimizer', desc: 'AI calendar assistant that rearranges flexible meetings to create uninterrupted focus time.', url: 'https://www.useclockwise.com', pricing: 'Freemium' },
+                    { name: 'Motion', tag: 'Automated Daily Planner', desc: 'AI calendar that dynamically plans your day, prioritizing tasks alongside calendar events.', url: 'https://www.usemotion.com', pricing: 'Paid' },
+                    { name: 'Reclaim AI', tag: 'Habit & Task Blocker', desc: 'Smart calendar assistant for Google Calendar that auto-schedules habits, tasks, and breaks.', url: 'https://reclaim.ai', pricing: 'Freemium' },
+                    { name: 'Taskade', tag: 'AI Workspace & Agents', desc: 'All-in-one productivity suite with AI autonomous agents, task lists, and calendar sync.', url: 'https://www.taskade.com', pricing: 'Freemium' },
+                    { name: 'Trevor AI', tag: 'Time Blocking Assistant', desc: 'Lightweight time-blocking app that syncs tasks with your calendar using smart AI suggestions.', url: 'https://www.trevorai.com', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'video',
+                title: 'AI VIDEO GENERATION',
+                icon: 'video',
+                tools: [
+                    { name: 'Descript', tag: 'Text-Based Video Editing', desc: 'All-in-one video and podcast editor where you edit video by simply editing the transcript text.', url: 'https://www.descript.com', pricing: 'Freemium' },
+                    { name: 'Haiper AI', tag: 'Creative Video Models', desc: 'Perceptual AI foundation models built to generate video content from text and image prompts.', url: 'https://haiper.ai', pricing: 'Freemium' },
+                    { name: 'Invideo AI', tag: 'Text-to-Video Scripting', desc: 'Generates complete video creation with scripts, voiceovers, clips, and subtitles from text prompts.', url: 'https://invideo.io', pricing: 'Freemium' },
+                    { name: 'Kling', tag: 'Photorealistic AI Video', desc: 'High-definition AI video generator capable of complex motion and long video clips.', url: 'https://klingai.com', pricing: 'Freemium' },
+                    { name: 'Krea AI', tag: 'Real-time Generation & Video', desc: 'Real-time generative canvas for live pattern generation, image upscaling, and video synthesis.', url: 'https://www.krea.ai', pricing: 'Freemium' },
+                    { name: 'LTX Studio', tag: 'Filmmaking & Storyboards', desc: 'AI filmmaking suite that allows creators to storyboard, generate, and edit full video scenes.', url: 'https://ltx.studio', pricing: 'Freemium' },
+                    { name: 'Luma AI', tag: 'Dream Machine 3D/Video', desc: 'Generative video model capable of fast high-quality 3D renders and cinema clips.', url: 'https://lumalabs.ai', pricing: 'Freemium' },
+                    { name: 'Pika AI', tag: 'Idea-to-Video Animator', desc: 'Generative platform that turns text and static images into dynamic animated video clips.', url: 'https://pika.art', pricing: 'Freemium' },
+                    { name: 'Runway', tag: 'Gen-2 & Gen-3 Video Suite', desc: 'Pioneering generative AI video platform featuring text-to-video, motion brush, and camera controls.', url: 'https://runwayml.com', pricing: 'Freemium' },
+                    { name: 'Sora', tag: 'OpenAI Video Model', desc: 'OpenAI\'s flagship video generation model creating realistic and imaginative scenes from prompts.', url: 'https://openai.com/sora', pricing: 'Paid' }
+                ]
+            },
+            {
+                id: 'graphic',
+                title: 'AI GRAPHIC DESIGN',
+                icon: 'palette',
+                tools: [
+                    { name: 'AutoDraw', tag: 'Fast Sketch-To-Drawing', desc: 'Google\'s quick drawing pair tool that matches rough doodles to clean vector drawings.', url: 'https://www.autodraw.com', pricing: 'Free' },
+                    { name: 'Canva', tag: 'Magic Design Suite', desc: 'Ubiquitous graphic design suite enhanced with Magic Studio AI generation tools.', url: 'https://www.canva.com', pricing: 'Freemium' },
+                    { name: 'Design.Com', tag: 'Logo & Brand Suite', desc: 'AI brand builder for generating logos, business cards, and visual identity kits.', url: 'https://www.design.com', pricing: 'Freemium' },
+                    { name: 'Framer', tag: 'AI Web Design', desc: 'Interactive web design tool that turns layout prompts into publishable HTML/CSS websites.', url: 'https://www.framer.com', pricing: 'Freemium' },
+                    { name: 'Microsoft Designer', tag: 'Visual Graphic Creator', desc: 'AI graphic design app powered by DALL-E for creating quick social posts and banners.', url: 'https://designer.microsoft.com', pricing: 'Free' },
+                    { name: 'Uizard', tag: 'UI/UX Wireframe AI', desc: 'AI prototyping tool that transforms sketches and text prompts into interactive UI screen designs.', url: 'https://uizard.io', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'knowledge',
+                title: 'AI KNOWLEDGE MANAGEMENT',
+                icon: 'database',
+                tools: [
+                    { name: 'Mem', tag: 'Self-Organizing Workspace', desc: 'AI-first knowledge workspace that automatically links notes, documents, and contacts.', url: 'https://mem.ai', pricing: 'Freemium' },
+                    { name: 'Notion', tag: 'Notion AI Workspace', desc: 'Connected workspace with AI built-in to summarize, write, analyze, and query docs.', url: 'https://www.notion.so', pricing: 'Freemium' },
+                    { name: 'Tettra', tag: 'Team Knowledge Base AI', desc: 'Internal wiki software with Kai AI bot to answer employee questions from company docs.', url: 'https://tettra.com', pricing: 'Freemium' }
+                ]
+            },
+            {
+                id: 'data',
+                title: 'AI DATA VISUALIZATION',
+                icon: 'bar-chart-3',
+                tools: [
+                    { name: 'Deckpilot', tag: 'Automated BI Slides', desc: 'Turns raw data streams into insightful charts and executive deck reports automatically.', url: 'https://deckpilot.io', pricing: 'Freemium' },
+                    { name: 'Flourish', tag: 'Data Storytelling Charts', desc: 'Data visualization tool for producing interactive charts, maps, and visual graphics.', url: 'https://flourish.studio', pricing: 'Freemium' },
+                    { name: 'Julius', tag: 'AI Data Scientist', desc: 'Analyzes spreadsheets and databases, generating statistical charts and Python code via prompt.', url: 'https://julius.ai', pricing: 'Freemium' },
+                    { name: 'Visme', tag: 'Visual Brand Graphics', desc: 'All-in-one graphic, report, and data visualization maker with AI generator.', url: 'https://www.visme.co', pricing: 'Freemium' },
+                    { name: 'Zing Data', tag: 'Mobile BI & Natural Query', desc: 'Mobile-first business intelligence tool to query SQL databases using natural language.', url: 'https://www.zingdata.com', pricing: 'Freemium' }
+                ]
+            }
+        ];
+
+        // --- 2. APPLICATION STATE ---
+        let state = {
+            currentCategory: 'all', // 'all', 'bookmarks', or category ID
+            searchQuery: '',
+            layoutView: 'grid', // 'grid' or 'tree'
+            favorites: JSON.parse(localStorage.getItem('ai_directory_favs') || '[]'),
+            theme: localStorage.getItem('ai_directory_theme') || 'light',
+            selectedTool: null
+        };
+
+        // --- 3. INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderCategoryChips();
+            populateSubmitCategories();
+            renderDirectory();
+            updateBookmarkBadge();
+            lucide.createIcons();
+        });
+
+        // --- 4. THEME CONTROLLER ---
+        function initTheme() {
+            if (state.theme === 'dark' || (!('ai_directory_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                state.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove('dark');
+                state.theme = 'light';
+            }
+        }
+
+        function toggleTheme() {
+            state.theme = state.theme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('ai_directory_theme', state.theme);
+            initTheme();
+        }
+
+        // --- 5. CATEGORY CHIPS RENDER ---
+        function renderCategoryChips() {
+            const container = document.getElementById('categoryChips');
+            
+            let html = `
+                <button onclick="setCategory('all')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5 ${state.currentCategory === 'all' ? 'bg-brand-500 text-white shadow-sm' : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'}">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                    <span>All Categories</span>
+                </button>
+            `;
+
+            DIRECTORY_DATA.forEach(cat => {
+                const isActive = state.currentCategory === cat.id;
+                html += `
+                    <button onclick="setCategory('${cat.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5 ${isActive ? 'bg-brand-500 text-white shadow-sm' : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'}">
+                        <i data-lucide="${cat.icon}" class="w-3.5 h-3.5"></i>
+                        <span>${cat.title}</span>
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function populateSubmitCategories() {
+            const select = document.getElementById('subCategory');
+            select.innerHTML = DIRECTORY_DATA.map(c => `<option value="${c.id}">${c.title}</option>`).join('');
+        }
+
+        // --- 6. FILTER & SEARCH HANDLERS ---
+        function setCategory(catId) {
+            state.currentCategory = catId;
+            renderCategoryChips();
+            updateFilterSummary();
+            renderDirectory();
+        }
+
+        function toggleBookmarksFilter() {
+            if (state.currentCategory === 'bookmarks') {
+                setCategory('all');
+            } else {
+                state.currentCategory = 'bookmarks';
+                renderCategoryChips();
+                updateFilterSummary();
+                renderDirectory();
+            }
+        }
+
+        function handleSearch() {
+            const val = document.getElementById('searchInput').value.trim();
+            state.searchQuery = val.toLowerCase();
+            
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (val) {
+                clearBtn.classList.remove('hidden');
+                showAutocomplete(val);
+            } else {
+                clearBtn.classList.add('hidden');
+                hideAutocomplete();
+            }
+
+            updateFilterSummary();
+            renderDirectory();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            state.searchQuery = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            hideAutocomplete();
+            updateFilterSummary();
+            renderDirectory();
+        }
+
+        function resetFilters() {
+            state.currentCategory = 'all';
+            document.getElementById('searchInput').value = '';
+            state.searchQuery = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            hideAutocomplete();
+            renderCategoryChips();
+            updateFilterSummary();
+            renderDirectory();
+        }
+
+        function updateFilterSummary() {
+            const bar = document.getElementById('filterSummaryBar');
+            const text = document.getElementById('filterSummaryText');
+            
+            let parts = [];
+            if (state.currentCategory === 'bookmarks') parts.push('Bookmarked Tools');
+            else if (state.currentCategory !== 'all') {
+                const cat = DIRECTORY_DATA.find(c => c.id === state.currentCategory);
+                if (cat) parts.push(cat.title);
+            }
+
+            if (state.searchQuery) parts.push(`"${state.searchQuery}"`);
+
+            if (parts.length > 0) {
+                text.innerText = parts.join(' + ');
+                bar.classList.remove('hidden');
+            } else {
+                bar.classList.add('hidden');
+            }
+        }
+
+        // --- 7. AUTOCOMPLETE LOGIC ---
+        function showAutocomplete(query) {
+            const dropdown = document.getElementById('autocompleteDropdown');
+            let matches = [];
+
+            DIRECTORY_DATA.forEach(cat => {
+                cat.tools.forEach(tool => {
+                    if (tool.name.toLowerCase().includes(query) || tool.tag.toLowerCase().includes(query)) {
+                        matches.push({ ...tool, categoryTitle: cat.title, categoryIcon: cat.icon });
+                    }
+                });
+            });
+
+            if (matches.length === 0) {
+                dropdown.classList.add('hidden');
+                return;
+            }
+
+            dropdown.innerHTML = matches.slice(0, 6).map(m => `
+                <div onclick="selectAutocomplete('${m.name}')" class="px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer flex items-center justify-between transition border-b border-slate-100 dark:border-slate-800/50 last:border-none">
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="${m.categoryIcon}" class="w-4 h-4 text-brand-500"></i>
+                        <span class="text-sm font-bold text-slate-800 dark:text-slate-100">${m.name}</span>
+                        <span class="text-xs text-slate-400">(${m.tag})</span>
+                    </div>
+                    <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">${m.categoryTitle}</span>
+                </div>
+            `).join('');
+
+            dropdown.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function hideAutocomplete() {
+            document.getElementById('autocompleteDropdown').classList.add('hidden');
+        }
+
+        function selectAutocomplete(toolName) {
+            document.getElementById('searchInput').value = toolName;
+            state.searchQuery = toolName.toLowerCase();
+            hideAutocomplete();
+            updateFilterSummary();
+            renderDirectory();
+            openToolByName(toolName);
+        }
+
+        // --- 8. RENDER DIRECTORY DATA ---
+        function renderDirectory() {
+            const gridContainer = document.getElementById('gridViewContainer');
+            const treeGrid = document.getElementById('treeGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            let totalMatches = 0;
+
+            // Filter Categories & Tools according to search/category criteria
+            const filteredData = DIRECTORY_DATA.map(cat => {
+                // Check category filter
+                if (state.currentCategory === 'bookmarks') {
+                    // Filter tools by bookmark
+                    const favTools = cat.tools.filter(t => state.favorites.includes(t.name) && matchesQuery(t, cat));
+                    return { ...cat, tools: favTools };
+                } else if (state.currentCategory !== 'all' && state.currentCategory !== cat.id) {
+                    return { ...cat, tools: [] };
+                }
+
+                // Check search query filter
+                const matchedTools = cat.tools.filter(t => matchesQuery(t, cat));
+                return { ...cat, tools: matchedTools };
+            }).filter(cat => cat.tools.length > 0);
+
+            // Compute Total Matched Tools
+            filteredData.forEach(c => totalMatches += c.tools.length);
+
+            if (totalMatches === 0) {
+                gridContainer.innerHTML = '';
+                treeGrid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            // Render GRID VIEW
+            gridContainer.innerHTML = filteredData.map(cat => `
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 pb-2 border-b border-slate-200 dark:border-slate-800">
+                        <div class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-950 text-brand-600 dark:text-brand-400 flex items-center justify-center">
+                            <i data-lucide="${cat.icon}" class="w-4 h-4"></i>
+                        </div>
+                        <h2 class="text-lg font-extrabold tracking-wide uppercase text-slate-900 dark:text-white">${cat.title}</h2>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold">${cat.tools.length}</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        ${cat.tools.map(tool => renderToolCardGrid(tool, cat)).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // Render INFOGRAPHIC TREE VIEW
+            treeGrid.innerHTML = filteredData.map(cat => `
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+                    <!-- Header -->
+                    <div class="flex items-center gap-2 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
+                        <i data-lucide="${cat.icon}" class="w-4 h-4 text-brand-500"></i>
+                        <h3 class="font-extrabold text-xs uppercase tracking-wider text-brand-600 dark:text-brand-400">${cat.title}</h3>
+                    </div>
+
+                    <!-- Tree Container -->
+                    <div class="relative pl-6 space-y-2">
+                        <div class="tree-line-v"></div>
+                        ${cat.tools.map(tool => `
+                            <div class="relative flex items-center group cursor-pointer" onclick="openToolModal('${tool.name}')">
+                                <div class="tree-line-h"></div>
+                                <div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700 group-hover:bg-brand-500 transition mr-2 shrink-0"></div>
+                                <span class="text-xs font-semibold text-slate-800 dark:text-slate-200 group-hover:text-brand-500 dark:group-hover:text-brand-400 transition truncate">${tool.name}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function matchesQuery(tool, category) {
+            if (!state.searchQuery) return true;
+            const q = state.searchQuery;
+            return tool.name.toLowerCase().includes(q) || 
+                   tool.tag.toLowerCase().includes(q) || 
+                   tool.desc.toLowerCase().includes(q) ||
+                   category.title.toLowerCase().includes(q);
+        }
+
+        function renderToolCardGrid(tool, category) {
+            const isFav = state.favorites.includes(tool.name);
+            return `
+                <div class="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 hover:border-brand-400 dark:hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/5 transition-all duration-200 flex flex-col justify-between relative cursor-pointer" onclick="openToolModal('${tool.name}')">
+                    <div>
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base group-hover:text-brand-500 dark:group-hover:text-brand-400 transition">${tool.name}</h3>
+                            <button onclick="event.stopPropagation(); toggleFavorite('${tool.name}')" class="text-slate-300 dark:text-slate-700 hover:text-amber-400 transition">
+                                <i data-lucide="star" class="w-4 h-4 ${isFav ? 'fill-amber-400 text-amber-400' : ''}"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs font-medium text-brand-600 dark:text-brand-400 mt-0.5 line-clamp-1">${tool.tag}</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">${tool.desc}</p>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
+                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">${tool.pricing}</span>
+                        <span class="text-brand-500 font-semibold group-hover:translate-x-1 transition flex items-center gap-0.5">
+                            Details <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- 9. VIEW TOGGLE (GRID VS TREE) ---
+        function setLayoutView(mode) {
+            state.layoutView = mode;
+            const gridBtn = document.getElementById('viewGridBtn');
+            const treeBtn = document.getElementById('viewTreeBtn');
+            const gridContainer = document.getElementById('gridViewContainer');
+            const treeContainer = document.getElementById('treeViewContainer');
+
+            if (mode === 'grid') {
+                gridContainer.classList.remove('hidden');
+                treeContainer.classList.add('hidden');
+
+                gridBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm";
+                treeBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+            } else {
+                gridContainer.classList.add('hidden');
+                treeContainer.classList.remove('hidden');
+
+                treeBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm";
+                gridBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+            }
+        }
+
+        // --- 10. BOOKMARKS / FAVORITES ---
+        function toggleFavorite(toolName) {
+            const idx = state.favorites.indexOf(toolName);
+            if (idx > -1) {
+                state.favorites.splice(idx, 1);
+                showToast(`Removed "${toolName}" from bookmarks`);
+            } else {
+                state.favorites.push(toolName);
+                showToast(`Saved "${toolName}" to bookmarks`);
+            }
+
+            localStorage.setItem('ai_directory_favs', JSON.stringify(state.favorites));
+            updateBookmarkBadge();
+            renderDirectory();
+
+            if (state.selectedTool && state.selectedTool.name === toolName) {
+                updateModalFavState();
+            }
+        }
+
+        function toggleFavoriteFromModal() {
+            if (state.selectedTool) {
+                toggleFavorite(state.selectedTool.name);
+            }
+        }
+
+        function updateBookmarkBadge() {
+            const badge = document.getElementById('bookmarkBadge');
+            if (state.favorites.length > 0) {
+                badge.innerText = state.favorites.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        // --- 11. TOOL DETAIL MODAL ---
+        function openToolModal(toolName) {
+            let foundTool = null;
+            let foundCat = null;
+
+            for (const cat of DIRECTORY_DATA) {
+                const t = cat.tools.find(item => item.name === toolName);
+                if (t) {
+                    foundTool = t;
+                    foundCat = cat;
+                    break;
+                }
+            }
+
+            if (!foundTool) return;
+
+            state.selectedTool = foundTool;
+
+            document.getElementById('modalCategoryIcon').innerHTML = `<i data-lucide="${foundCat.icon}" class="w-7 h-7"></i>`;
+            document.getElementById('modalCategoryBadge').innerText = foundCat.title;
+            document.getElementById('modalToolName').innerText = foundTool.name;
+            document.getElementById('modalTagline').innerText = foundTool.tag;
+            document.getElementById('modalDescription').innerText = foundTool.desc;
+            document.getElementById('modalPricing').innerText = foundTool.pricing;
+            document.getElementById('modalVisitLink').href = foundTool.url;
+
+            // Generate use cases tags
+            const tags = foundTool.tag.split('&').map(s => s.trim());
+            document.getElementById('modalUseCases').innerHTML = tags.map(tg => `
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">${tg}</span>
+            `).join('');
+
+            updateModalFavState();
+
+            document.getElementById('toolModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function openToolByName(name) {
+            openToolModal(name);
+        }
+
+        function updateModalFavState() {
+            if (!state.selectedTool) return;
+            const isFav = state.favorites.includes(state.selectedTool.name);
+            const btn = document.getElementById('modalFavBtn');
+            const text = document.getElementById('modalFavText');
+
+            if (isFav) {
+                btn.className = "flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border border-amber-300 bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 transition";
+                text.innerText = "Bookmarked";
+            } else {
+                btn.className = "flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition";
+                text.innerText = "Bookmark";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('toolModal').classList.add('hidden');
+            state.selectedTool = null;
+        }
+
+        // --- 12. SUBMIT MODAL ---
+        function openSubmitModal() {
+            document.getElementById('submitModal').classList.remove('hidden');
+        }
+
+        function closeSubmitModal() {
+            document.getElementById('submitModal').classList.add('hidden');
+        }
+
+        function handleToolSubmission(e) {
+            e.preventDefault();
+            const name = document.getElementById('subName').value;
+            closeSubmitModal();
+            showToast(`Thank you! "${name}" was submitted for review.`);
+            document.getElementById('submitToolForm').reset();
+        }
+
+        // --- 13. TOAST NOTIFICATION ---
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Global keydown handler to close modals
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeSubmitModal();
+                hideAutocomplete();
+            }
+        });
+    </script>
+</body>
+</html>
